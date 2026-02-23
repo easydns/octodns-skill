@@ -1,0 +1,21 @@
+# Python
+venv/
+env/
+*.pyc
+__pycache__/
+*.egg-info/
+
+# Zone files (real data)
+config/*.yaml
+!config/example-*.yaml
+
+# Credentials
+.env
+*.key
+*.pem
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
