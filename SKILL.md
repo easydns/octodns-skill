@@ -7,6 +7,19 @@ description: Manage DNS zones across multiple providers using octoDNS ("DNS as c
 
 Manage DNS zones declaratively across multiple providers using octoDNS. Think of it as "infrastructure as code" but for DNS records.
 
+## ⚠️ CRITICAL SAFETY WARNING
+
+**octoDNS operates on "desired state" - the YAML file represents the ENTIRE zone.**
+
+**If the zone file has 1 record but DNS has 50 records, octoDNS will DELETE 49 records.**
+
+**MANDATORY SAFETY WORKFLOW:**
+
+1. **For existing zones: ALWAYS dump first** (`scripts/dump.sh`)
+2. **ALWAYS preview before applying** (run without `--doit`)
+3. **REVIEW the diff carefully** - unexpected "Delete" lines = DANGER
+4. **Never assume** - verify the preview matches your intent
+
 ## Quick Start
 
 ### 1. Install octoDNS
@@ -17,7 +30,17 @@ scripts/install.sh
 
 This installs octoDNS core plus the easyDNS provider.
 
-### 2. Create a config file
+### 2. Dump existing zone (REQUIRED for existing zones)
+
+**If managing an existing zone with records already in DNS:**
+
+```bash
+scripts/dump.sh example.com.
+```
+
+This creates `config/example.com.yaml` with ALL current records. **Skipping this step will delete existing records!**
+
+### 3. Create a config file
 
 ```bash
 scripts/init_config.sh example.com
@@ -25,7 +48,7 @@ scripts/init_config.sh example.com
 
 Creates `config/production.yaml` with easyDNS provider configured.
 
-### 3. Define your zone
+### 4. Define your zone
 
 Create `config/example.com.yaml`:
 
@@ -52,13 +75,17 @@ www:
       value: mail.example.com.
 ```
 
-### 4. Preview changes (dry-run)
+### 5. Preview changes (MANDATORY)
+
+**Always preview first - look for unexpected Delete lines:**
 
 ```bash
-scripts/sync.sh --noop
+scripts/sync.sh
 ```
 
-### 5. Apply changes
+(Note: dry-run is the default - no flag needed)
+
+### 6. Apply changes (only when safe)
 
 ```bash
 scripts/sync.sh --doit

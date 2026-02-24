@@ -60,5 +60,24 @@ fi
 echo "Running: $CMD"
 echo ""
 
-# Execute
-$CMD
+# Execute and capture output
+OUTPUT=$($CMD 2>&1)
+EXIT_CODE=$?
+
+# Display output
+echo "$OUTPUT"
+
+# Safety check: warn about deletes
+if echo "$OUTPUT" | grep -q "Delete <"; then
+    echo ""
+    echo "⚠️  WARNING: This sync will DELETE records!"
+    echo "⚠️  Review the 'Delete' lines above carefully."
+    if [ -n "$MODE" ]; then
+        echo "⚠️  Run again with --doit to apply (currently in apply mode)"
+    else
+        echo "⚠️  This was a preview. Deletes will happen if you run with --doit"
+    fi
+    echo ""
+fi
+
+exit $EXIT_CODE

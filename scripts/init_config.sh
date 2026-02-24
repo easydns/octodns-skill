@@ -70,6 +70,10 @@ EOF
 fi
 
 echo ""
+echo "⚠️  WARNING: If ${ZONE} already has records in DNS:"
+echo "⚠️  Run 'scripts/dump.sh ${ZONE}' first to capture them!"
+echo "⚠️  Otherwise you'll DELETE existing records when you sync."
+echo ""
 echo "Next steps:"
 echo "1. Set environment variables:"
 echo "   export EASYDNS_TOKEN='your-token'"

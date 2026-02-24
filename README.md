@@ -12,6 +12,17 @@ A skill package that enables AI agents (and humans) to manage DNS zones programm
 
 Built specifically for AI agent workflows, but accessible to humans too.
 
+## ⚠️ IMPORTANT SAFETY WARNING
+
+**octoDNS treats YAML as the "desired state" of your ENTIRE zone.**
+
+If your DNS has 50 records but your YAML only has 1 record, octoDNS will **DELETE the other 49 records** when you sync!
+
+**ALWAYS:**
+1. **Dump existing zones FIRST** (see step 2 below)
+2. **Preview changes** before applying (`--doit`)
+3. **Review the diff carefully** - look for unexpected Deletes
+
 ## Quick Start
 
 ### 1. Install
@@ -22,7 +33,17 @@ Built specifically for AI agent workflows, but accessible to humans too.
 
 Installs octoDNS and the easyDNS provider in a local virtualenv.
 
-### 2. Configure Credentials
+### 2. Dump Existing Zone (CRITICAL FIRST STEP)
+
+**If managing an existing zone, dump it first:**
+
+```bash
+./scripts/dump.sh example.com.
+```
+
+This creates `config/example.com.yaml` with ALL existing records. **Never skip this step for existing zones!**
+
+### 3. Configure Credentials
 
 Create `.credentials/easydns.json`:
 
@@ -35,13 +56,9 @@ Create `.credentials/easydns.json`:
 }
 ```
 
-### 3. Create a Zone File
+### 4. Edit the Zone File
 
-```bash
-./scripts/init_config.sh example.com.
-```
-
-Creates `config/example.com.yaml`. Edit it with your DNS records:
+Edit `config/example.com.yaml` with your DNS records:
 
 ```yaml
 ---
@@ -62,17 +79,26 @@ www:
   value: example.com.
 ```
 
-### 4. Apply Changes
+### 5. Preview Changes (Always!)
 
-Preview:
+**Never skip the preview step:**
 ```bash
 ./scripts/sync.sh --zone example.com.
 ```
 
-Apply:
+**Look for unexpected "Delete" lines in the preview!**
+
+### 6. Apply Changes (Only When Safe)
+
 ```bash
 ./scripts/sync.sh --zone example.com. --doit
 ```
+
+**Safety checklist before running --doit:**
+- ✅ Did you dump the existing zone first?
+- ✅ Did you review the preview output?
+- ✅ Are the "Delete" lines expected?
+- ✅ Do the record counts look right?
 
 ## For AI Agents
 

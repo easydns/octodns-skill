@@ -25,8 +25,14 @@ fi
 # Activate venv
 source "${VENV_DIR}/bin/activate"
 
-echo "Dumping zone: $ZONE"
-echo "Output: ${SKILL_DIR}/config/${ZONE}.yaml"
+echo "================================================================"
+echo "  DUMPING EXISTING ZONE - CRITICAL SAFETY STEP"
+echo "================================================================"
+echo "Zone: $ZONE"
+echo "Output: ${SKILL_DIR}/config/${ZONE}yaml"
+echo ""
+echo "This captures ALL existing records in the zone."
+echo "ALWAYS do this before making changes to existing zones!"
 echo ""
 
 octodns-dump \
