@@ -48,6 +48,23 @@ fi
 # Activate venv
 source "${VENV_DIR}/bin/activate"
 
+# Create temporary config with the specific zone
+TEMP_CONFIG=$(mktemp)
+cat > "$TEMP_CONFIG" <<EOF
+---
+providers:
+  easydns:
+    class: octodns_easydns.EasyDnsProvider
+    token: env/EASYDNS_TOKEN
+    api_key: env/EASYDNS_API_KEY
+    portfolio: env/EASYDNS_PORTFOLIO
+
+zones:
+  ${ZONE}
+    sources:
+      - ${PROVIDER}
+EOF
+
 echo "================================================================"
 echo "  DUMPING EXISTING ZONE - CRITICAL SAFETY STEP"
 echo "================================================================"
@@ -62,11 +79,15 @@ echo ""
 # Load credentials for the provider
 load_provider_credentials "$PROVIDER" "$AGENT_CONFIG"
 
+# Run dump with temporary config
 octodns-dump \
-    --config-file="$CONFIG_FILE" \
+    --config-file="$TEMP_CONFIG" \
     --output-dir="${SKILL_DIR}/config" \
     "$ZONE" \
     "$PROVIDER"
+
+# Clean up temp file
+rm -f "$TEMP_CONFIG"
 
 echo ""
 echo "✓ Zone dumped successfully"
