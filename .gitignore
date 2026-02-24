@@ -5,6 +5,10 @@ env/
 __pycache__/
 *.egg-info/
 
+# Agent config (contains paths/setup)
+.agent-config.json
+!.agent-config.json.template
+
 # Zone files (real data)
 config/*.yaml
 !config/example-*.yaml

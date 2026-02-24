@@ -7,18 +7,30 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_DIR="$(dirname "$SCRIPT_DIR")"
 VENV_DIR="${SKILL_DIR}/venv"
 CONFIG_FILE="${SKILL_DIR}/config/production.yaml"
+AGENT_CONFIG="${SKILL_DIR}/.agent-config.json"
+
+# Load helper functions
+source "${SCRIPT_DIR}/lib/config.sh"
 
 if [ -z "$1" ]; then
+    DEFAULT_PROV=$(get_default_provider "$AGENT_CONFIG")
     echo "Usage: $0 <zone> [provider]"
-    echo "Example: $0 example.com easydns"
+    echo "Example: $0 example.com"
     echo "         $0 example.com route53"
     echo ""
-    echo "If provider is not specified, uses 'easydns' by default"
+    echo "Default provider from config: $DEFAULT_PROV"
+    echo "Override by specifying provider as 2nd argument"
     exit 1
 fi
 
 ZONE="$1"
-PROVIDER="${2:-easydns}"
+
+# Get default provider from config, or use command-line override
+if [ -n "$2" ]; then
+    PROVIDER="$2"
+else
+    PROVIDER=$(get_default_provider "$AGENT_CONFIG")
+fi
 
 # Check if venv exists
 if [ ! -d "$VENV_DIR" ]; then
@@ -40,10 +52,8 @@ echo "This captures ALL existing records in the zone."
 echo "ALWAYS do this before making changes to existing zones!"
 echo ""
 
-# Load credentials if provider is easydns
-if [ "$PROVIDER" = "easydns" ]; then
-    source "${SCRIPT_DIR}/load_credentials.sh"
-fi
+# Load credentials for the provider
+load_provider_credentials "$PROVIDER" "$AGENT_CONFIG"
 
 octodns-dump \
     --config-file="$CONFIG_FILE" \

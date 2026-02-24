@@ -7,6 +7,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_DIR="$(dirname "$SCRIPT_DIR")"
 VENV_DIR="${SKILL_DIR}/venv"
 CONFIG_FILE="${SKILL_DIR}/config/production.yaml"
+AGENT_CONFIG="${SKILL_DIR}/.agent-config.json"
+
+# Load helper functions
+source "${SCRIPT_DIR}/lib/config.sh"
 
 # Check if venv exists
 if [ ! -d "$VENV_DIR" ]; then
@@ -17,8 +21,9 @@ fi
 # Activate venv
 source "${VENV_DIR}/bin/activate"
 
-# Load easyDNS credentials
-source "${SCRIPT_DIR}/load_credentials.sh"
+# Load credentials for default provider
+DEFAULT_PROVIDER=$(get_default_provider "$AGENT_CONFIG")
+load_provider_credentials "$DEFAULT_PROVIDER" "$AGENT_CONFIG"
 
 # Default to dry-run (no --doit flag)
 MODE=""

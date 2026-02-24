@@ -1,0 +1,11 @@
+{
+  "default_provider": "easydns",
+  "credentials_path": "../.credentials",
+  "providers": {
+    "easydns": {
+      "class": "octodns_easydns.EasyDnsProvider",
+      "credentials_file": "easydns.json"
+    }
+  },
+  "_comment": "Run ./scripts/setup.sh to configure this file for your environment"
+}

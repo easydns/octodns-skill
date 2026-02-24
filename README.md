@@ -27,7 +27,17 @@ If your DNS has 50 records but your YAML only has 1 record, octoDNS will **DELET
 
 ## Quick Start
 
-### 1. Install
+### 1. Setup (One-time)
+
+Configure your default provider and credentials:
+
+```bash
+./scripts/setup.sh
+```
+
+This creates `.agent-config.json` with your provider settings and credentials.
+
+### 2. Install
 
 ```bash
 ./scripts/install.sh
@@ -35,7 +45,7 @@ If your DNS has 50 records but your YAML only has 1 record, octoDNS will **DELET
 
 Installs octoDNS and the easyDNS provider in a local virtualenv.
 
-### 2. Dump Existing Zone (CRITICAL FIRST STEP)
+### 3. Dump Existing Zone (CRITICAL FIRST STEP)
 
 **If managing an existing zone, dump it first:**
 
@@ -44,19 +54,6 @@ Installs octoDNS and the easyDNS provider in a local virtualenv.
 ```
 
 This creates `config/example.com.yaml` with ALL existing records. **Never skip this step for existing zones!**
-
-### 3. Configure Credentials
-
-Create `.credentials/easydns.json`:
-
-```json
-{
-  "provider": "easydns",
-  "api_token": "YOUR_TOKEN",
-  "api_key": "YOUR_API_KEY",
-  "portfolio": ""
-}
-```
 
 ### 4. Edit the Zone File
 
@@ -104,7 +101,16 @@ www:
 
 ## For AI Agents
 
-If you're an AI agent, read [SKILL.md](SKILL.md) for the full skill documentation including:
+**Agent-friendly setup:**  
+After running `./scripts/setup.sh` once, agents don't need to specify the provider for every command - it's automatically read from `.agent-config.json`.
+
+Example workflow:
+```bash
+./scripts/dump.sh example.com          # Uses default provider from config
+./scripts/sync.sh --zone example.com.  # Uses default provider
+```
+
+Read [SKILL.md](SKILL.md) for the full skill documentation including:
 - How to use the scripts
 - DNS record format reference
 - Zone migration workflows
