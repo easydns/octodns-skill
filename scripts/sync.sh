@@ -55,6 +55,14 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# If zone specified, ensure it's in production.yaml
+if [ -n "$ZONE" ]; then
+    if ! grep -q "^  ${ZONE}" "$CONFIG_FILE" 2>/dev/null; then
+        echo "Zone $ZONE not in config, adding it..."
+        "${SCRIPT_DIR}/add-zone.sh" "$ZONE" "$DEFAULT_PROVIDER"
+    fi
+fi
+
 # Build command
 CMD="octodns-sync --config-file=$CONFIG_FILE $MODE"
 

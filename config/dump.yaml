@@ -1,0 +1,19 @@
+---
+# Minimal config for dumping zones from providers
+# octodns-dump doesn't need zones defined - it dumps directly from source
+
+providers:
+  easydns:
+    class: octodns_easydns.EasyDnsProvider
+    token: env/EASYDNS_TOKEN
+    api_key: env/EASYDNS_API_KEY
+    portfolio: env/EASYDNS_PORTFOLIO
+  
+  route53:
+    class: octodns_route53.Route53Provider
+    access_key_id: env/AWS_ACCESS_KEY_ID
+    secret_access_key: env/AWS_SECRET_ACCESS_KEY
+  
+  cloudflare:
+    class: octodns_cloudflare.CloudflareProvider
+    token: env/CLOUDFLARE_TOKEN

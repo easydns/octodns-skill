@@ -12,6 +12,7 @@ __pycache__/
 # Zone files (real data)
 config/*.yaml
 !config/example-*.yaml
+!config/dump.yaml
 
 # Credentials
 .env

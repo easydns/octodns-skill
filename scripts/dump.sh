@@ -6,7 +6,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_DIR="$(dirname "$SCRIPT_DIR")"
 VENV_DIR="${SKILL_DIR}/venv"
-CONFIG_FILE="${SKILL_DIR}/config/production.yaml"
+CONFIG_FILE="${SKILL_DIR}/config/dump.yaml"
 AGENT_CONFIG="${SKILL_DIR}/.agent-config.json"
 
 # Load helper functions
