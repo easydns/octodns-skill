@@ -23,7 +23,14 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-ZONE="$1"
+ZONE_INPUT="$1"
+
+# Add trailing dot if not present
+if [[ ! "$ZONE_INPUT" =~ \.$ ]]; then
+    ZONE="${ZONE_INPUT}."
+else
+    ZONE="$ZONE_INPUT"
+fi
 
 # Get default provider from config, or use command-line override
 if [ -n "$2" ]; then
