@@ -60,7 +60,7 @@ providers:
     portfolio: env/EASYDNS_PORTFOLIO
 
 zones:
-  ${ZONE}
+  ${ZONE}:
     sources:
       - ${PROVIDER}
 EOF
