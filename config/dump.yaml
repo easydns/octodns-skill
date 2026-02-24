@@ -1,5 +1,6 @@
 ---
 # Config for dumping zones from providers
+# Add other providers here as needed (install them first via pip)
 
 providers:
   easydns:
@@ -7,14 +8,5 @@ providers:
     token: env/EASYDNS_TOKEN
     api_key: env/EASYDNS_API_KEY
     portfolio: env/EASYDNS_PORTFOLIO
-  
-  route53:
-    class: octodns_route53.Route53Provider
-    access_key_id: env/AWS_ACCESS_KEY_ID
-    secret_access_key: env/AWS_SECRET_ACCESS_KEY
-  
-  cloudflare:
-    class: octodns_cloudflare.CloudflareProvider
-    token: env/CLOUDFLARE_TOKEN
 
 zones: {}
