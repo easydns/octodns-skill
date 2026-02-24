@@ -35,10 +35,14 @@ echo "This captures ALL existing records in the zone."
 echo "ALWAYS do this before making changes to existing zones!"
 echo ""
 
+# Load credentials
+source "${SCRIPT_DIR}/load_credentials.sh"
+
 octodns-dump \
     --config-file="$CONFIG_FILE" \
     --output-dir="${SKILL_DIR}/config" \
-    --zone="$ZONE"
+    "$ZONE" \
+    easydns
 
 echo ""
 echo "✓ Zone dumped successfully"
