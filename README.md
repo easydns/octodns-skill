@@ -12,13 +12,15 @@ A skill package that enables AI agents (and humans) to manage DNS zones programm
 
 Built specifically for AI agent workflows, but accessible to humans too.
 
-## ⚠️ IMPORTANT SAFETY WARNING
+## ⚠️ CRITICAL SAFETY WARNING - READ THIS FIRST
 
 **octoDNS treats YAML as the "desired state" of your ENTIRE zone.**
 
 If your DNS has 50 records but your YAML only has 1 record, octoDNS will **DELETE the other 49 records** when you sync!
 
-**ALWAYS:**
+**📖 [Read the complete Safety Guide](SAFETY.md) before using this tool.**
+
+**Quick safety rules:**
 1. **Dump existing zones FIRST** (see step 2 below)
 2. **Preview changes** before applying (`--doit`)
 3. **Review the diff carefully** - look for unexpected Deletes
