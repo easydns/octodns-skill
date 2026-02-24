@@ -1,6 +1,5 @@
 ---
-# Minimal config for dumping zones from providers
-# octodns-dump doesn't need zones defined - it dumps directly from source
+# Config for dumping zones from providers
 
 providers:
   easydns:
@@ -17,3 +16,5 @@ providers:
   cloudflare:
     class: octodns_cloudflare.CloudflareProvider
     token: env/CLOUDFLARE_TOKEN
+
+zones: {}
