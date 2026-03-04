@@ -46,7 +46,7 @@ echo "Provider: $PROVIDER"
 # Add the zone with proper YAML indentation
 cat >> "$CONFIG_FILE" <<EOF
 
-  ${ZONE}
+  ${ZONE}:
     sources:
       - config
     targets:
