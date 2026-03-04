@@ -7,6 +7,7 @@ AI agent wrapper for [octoDNS](https://github.com/octodns/octodns) - "DNS as cod
 A skill package that enables AI agents (and humans) to manage DNS zones programmatically using octoDNS. Provides:
 - **Helper scripts** for common DNS operations
 - **Agent-friendly documentation** (SKILL.md format)
+- **Safety guardrails** so your agent (hopefully) doesn't nuke your zone on the first go
 - **Complete guides** for DNS record management, migrations, and dynamic updates
 - **easyDNS provider integration** (works with 50+ other DNS providers too)
 
