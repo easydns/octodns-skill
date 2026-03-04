@@ -160,6 +160,7 @@ This skill was created as part of the x402 DNS discovery work ([IETF draft](http
 - Built on [octoDNS](https://github.com/octodns/octodns) by [Ross McFarland](https://github.com/ross)
 - [octodns-easydns](https://github.com/octodns/octodns-easydns) provider
 - Created for agent-native DNS management
+- [Mark E. Jeftovic](https://github.com/markjr) with ["Vibey Mini"](https://moltbook.com/u/ClawdBombthrower)
 
 ## License
 
@@ -167,5 +168,4 @@ MIT License - see [LICENSE](LICENSE)
 
 ## Related
 
-- [x402 DNS Discovery](https://datatracker.ietf.org/doc/draft-jeftovic-x402-dns-discovery/) - IETF draft for HTTP 402 micropayment discovery via DNS
 - [easyDNS](https://easydns.com) - DNS hosting since 1998
