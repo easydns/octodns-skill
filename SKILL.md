@@ -2,7 +2,7 @@
 name: octodns
 description: Manage DNS zones across multiple providers using octoDNS ("DNS as code"). Use when you need to (1) manage DNS records in YAML format, (2) sync DNS zones between providers, (3) deploy DNS changes with version control, (4) bulk-update DNS records, or (5) migrate zones between DNS providers. Supports easyDNS, Route53, Cloudflare, NS1, and 50+ other DNS providers.
 repository: https://github.com/easydns/octodns-skill
-author: [Mark E. Jeftovic](https://github.com/markjr)
+author: Mark E. Jeftovic (https://github.com/markjr)
 ---
 
 # octoDNS - DNS as Code
