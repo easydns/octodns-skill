@@ -127,7 +127,7 @@ Read [SKILL.md](SKILL.md) for the full skill documentation including:
 
 | Script | Purpose |
 |--------|---------|
-| `install.sh` | Install octoDNS + easyDNS provider |
+| `install.sh` | Install octoDNS + provider (easyDNS default)|
 | `init_config.sh` | Initialize config for new zone |
 | `sync.sh` | Sync zones (preview or --doit to apply) |
 | `dump.sh` | Export existing zone to YAML |
@@ -135,7 +135,7 @@ Read [SKILL.md](SKILL.md) for the full skill documentation including:
 
 ## Supported Providers
 
-- **easyDNS** (featured, tested extensively)
+- **easyDNS** (default, for obvious reasons)
 - Route53, Cloudflare, NS1, Google Cloud DNS, and [50+ others](https://github.com/octodns/octodns#providers)
 
 ## Use Cases
@@ -157,7 +157,7 @@ This skill was created as part of the x402 DNS discovery work ([IETF draft](http
 
 ## Credits
 
-- Built on [octoDNS](https://github.com/octodns/octodns) by GitHub
+- Built on [octoDNS](https://github.com/octodns/octodns) by [Ross McFarland](https://github.com/ross)
 - [octodns-easydns](https://github.com/octodns/octodns-easydns) provider
 - Created for agent-native DNS management
 
